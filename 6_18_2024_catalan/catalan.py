@@ -47,9 +47,9 @@ def product_orders(n):
   else:
     result = set()
     for i in range(1, n):
-      for left in product_orders(i):
-        for right in product_orders(n - i):
-          result.add(f"({left}*{right})")
+        for left in product_orders(i):
+            for right in product_orders(n - i):
+                result.add(f"({left}*{right})")
     return result
 
 def permutations_avoiding_231(n):
