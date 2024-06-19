@@ -47,10 +47,16 @@ def product_orders(n):
   else:
     result = set()
     for i in range(1, n):
-        for left in product_orders(i):
-            for right in product_orders(n - i):
-                result.add(f"({left}*{right})")
+        left_orders = product_orders(i)
+        right_orders = product_orders(n - i)
+        for left in left_orders:
+            for right in right_orders:
+                if len(left) == 1 and len(right) == 1:
+                    result.add(f"{left}*{right}")
+                else:
+                    result.add(f"({left})*({right})")
     return result
+
 
 def permutations_avoiding_231(n):
   """
@@ -103,15 +109,65 @@ def triangulations(n):
   """
   if n < 3:
     return set()
-  elif n == 3:
-    return {tuple()}
-  else:
-    result = set()
-    for k in range(1, n-1):
-        left_triangulations = triangulations(k+1)
-        right_triangulations = triangulations(n-k)
-        for left in left_triangulations:
-            for right in right_triangulations:
-                triangulation = tuple(sorted(list(left) + list(((0, k),)) + [(i + k, j + k) for i, j in right]))
-                result.add(triangulation)
-    return result
+  # Memoization table to store results of subproblems
+  memo = {}
+
+  def recursive_triangulations(start, end):
+      if (start, end) in memo:
+          return memo[(start, end)]
+      
+      if end - start <= 2:
+          return {()}
+      
+      result = set()
+      for k in range(start + 1, end):
+          left_triangulations = recursive_triangulations(start, k)
+          right_triangulations = recursive_triangulations(k, end)
+          for left in left_triangulations:
+              for right in right_triangulations:
+                  new_triangulation = tuple(sorted(left + right + ((start, k), (k, end))))
+                  result.add(new_triangulation)
+      
+      memo[(start, end)] = result
+      return result
+  
+  return recursive_triangulations(0, n)
+
+
+
+def triangulations_alt(n):
+    """
+    Returns a set of all possible triangulations of an n-sided polygon. A triangulation
+    is represented as a tuple of internal edges. Vertices are labeled 0 through n-1 clockwise.
+
+    Parameters:
+        n (int): The number of sides of the polygon.
+
+    Returns:
+        A set of tuple of pairs, where each pair represents an internal edge in the triangulation.
+
+    Example:
+    triangulations(3) is {((0, 1), (1, 2), (2, 0))}
+    """
+    if n < 3:
+        return set()
+
+    def helper(vertices):
+        if len(vertices) == 3:
+            # A triangle is already a triangulation.
+            return {tuple(sorted((vertices[i], vertices[(i + 1) % 3])) for i in range(3))}
+
+        results = set()
+        for i in range(1, len(vertices) - 1):
+            diag = (vertices[0], vertices[i])
+            # Recursively triangulate the two resulting polygons.
+            left_part = helper(vertices[:i + 1])
+            right_part = helper(vertices[i:])
+
+            for left in left_part:
+                for right in right_part:
+                    results.add(tuple(sorted(left + right + (diag,))))
+        return results
+
+    vertices = list(range(n))
+    return helper(vertices)
