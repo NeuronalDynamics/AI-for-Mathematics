@@ -1,5 +1,8 @@
 import itertools
 import random
+import os
+from itertools import permutations
+import time
 
 def is_valid_SYT(candidate):
   """
@@ -21,7 +24,22 @@ def is_valid_SYT(candidate):
   >>> is_valid_SYT(((1, 2, 3), (5, 4), (6))
   False
   """
-  return False
+  # Check if each row is strictly increasing
+  for row in candidate:
+      if not all(row[i] < row[i + 1] for i in range(len(row) - 1)):
+          return False
+
+  # Check if each column is strictly increasing
+  num_cols = max(len(row) for row in candidate)
+  for col in range(num_cols):
+      col_elements = []
+      for row in candidate:
+          if col < len(row):
+              col_elements.append(row[col])
+      if not all(col_elements[i] < col_elements[i + 1] for i in range(len(col_elements) - 1)):
+          return False
+
+  return True
 
 def reshape_perm(perm, shape):
   """
@@ -38,7 +56,13 @@ def reshape_perm(perm, shape):
   >>> reshape_perm((1, 2, 3, 4, 5, 6), (3, 2, 1))
   ((1, 2, 3), (4, 5), (6,))
   """
-  return tuple()
+  tableau = []
+  index = 0
+  for row_length in shape:
+      row = tuple(perm[index:index + row_length])
+      tableau.append(row)
+      index += row_length
+  return tuple(tableau)
 
 def SYTs(shape):
   """
@@ -57,6 +81,15 @@ def SYTs(shape):
 
   n = sum(shape)
   results = []
+
+  # Generate all permutations of numbers from 1 to n
+  for perm in permutations(range(1, n + 1)):
+      # Reshape the permutation to the given shape
+      tableau = reshape_perm(perm, shape)
+      # Check if the reshaped tableau is a valid SYT
+      if is_valid_SYT(tableau):
+          results.append(tableau)
+
   return results
 
 def random_SYT(shape):
@@ -75,7 +108,13 @@ def random_SYT(shape):
   >>> random_SYT((2, 1))
   ((1, 2), (3,))
   """
-  return tuple()
+  n = sum(shape)
+  while True:
+      perm = list(range(1, n + 1))
+      random.shuffle(perm)
+      tableau = reshape_perm(perm, shape)
+      if is_valid_SYT(tableau):
+          return tableau
 
 def random_SYT_2(shape):
   """
@@ -93,4 +132,54 @@ def random_SYT_2(shape):
   >>> random_SYT_2((2, 1))
   ((1, 2), (3,))
   """
-  return tuple()
+  n = sum(shape)
+  while True:
+      tableau = []
+      for row_length in shape:
+          tableau.append([0] * row_length)
+
+      numbers = list(range(1, n + 1))
+      random.shuffle(numbers)
+      
+      for num in numbers:
+          placed = False
+          for i, row in enumerate(tableau):
+              for j in range(len(row)):
+                  if row[j] == 0:
+                      tableau[i][j] = num
+                      placed = True
+                      break
+              if placed:
+                  break
+      
+      # Convert the tableau to tuple of tuples
+      tableau_tuple = tuple(tuple(row) for row in tableau)
+
+      if is_valid_SYT(tableau_tuple):
+          return tableau_tuple
+      
+
+def save_SYTs_to_file(shape, directory='data'):
+    """
+    Generates and saves all valid SYTs for the given shape to a file in the specified directory.
+
+    Parameters:
+    - shape (Tuple[int]): The shape of the SYTs.
+    - directory (str): The directory to save the files in.
+    """
+    # Ensure the directory exists
+    os.makedirs(directory, exist_ok=True)
+    
+    # Generate SYTs for the given shape
+    syt_list = SYTs(shape)
+    
+    # Convert shape to string format for filename
+    shape_str = '_'.join(map(str, shape))
+    
+    # Define the filename
+    filename = os.path.join(directory, f'SYTs_{shape_str}.txt')
+    
+    # Save SYTs to file
+    with open(filename, 'w') as file:
+        for syt in syt_list:
+            file.write(f'{syt}\n')
