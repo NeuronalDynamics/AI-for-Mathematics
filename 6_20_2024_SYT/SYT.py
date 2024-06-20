@@ -132,54 +132,47 @@ def random_SYT_2(shape):
   >>> random_SYT_2((2, 1))
   ((1, 2), (3,))
   """
+  # Initialize the tableau with zeros
   n = sum(shape)
-  while True:
-      tableau = []
-      for row_length in shape:
-          tableau.append([0] * row_length)
+  tableau = [[0] * length for length in shape]
+  for num in range(1, n + 1):
+      valid_positions = []
+      # Find all valid positions for the current number
+      for i, row in enumerate(tableau):
+          for j in range(len(row)):
+              if tableau[i][j] == 0:
+                  if (i == 0 or tableau[i - 1][j] > 0) and (j == 0 or tableau[i][j - 1] > 0):
+                      valid_positions.append((i, j))
 
-      numbers = list(range(1, n + 1))
-      random.shuffle(numbers)
-      
-      for num in numbers:
-          placed = False
-          for i, row in enumerate(tableau):
-              for j in range(len(row)):
-                  if row[j] == 0:
-                      tableau[i][j] = num
-                      placed = True
-                      break
-              if placed:
-                  break
-      
-      # Convert the tableau to tuple of tuples
-      tableau_tuple = tuple(tuple(row) for row in tableau)
-
-      if is_valid_SYT(tableau_tuple):
-          return tableau_tuple
+      # Randomly choose a valid position
+      if valid_positions:
+          i, j = random.choice(valid_positions)
+          tableau[i][j] = num
+  # Convert lists to tuples for the final tableau
+  return tuple(tuple(row) for row in tableau)
       
 
 def save_SYTs_to_file(shape, directory='data'):
-    """
-    Generates and saves all valid SYTs for the given shape to a file in the specified directory.
+  """
+  Generates and saves all valid SYTs for the given shape to a file in the specified directory.
 
-    Parameters:
-    - shape (Tuple[int]): The shape of the SYTs.
-    - directory (str): The directory to save the files in.
-    """
-    # Ensure the directory exists
-    os.makedirs(directory, exist_ok=True)
-    
-    # Generate SYTs for the given shape
-    syt_list = SYTs(shape)
-    
-    # Convert shape to string format for filename
-    shape_str = '_'.join(map(str, shape))
-    
-    # Define the filename
-    filename = os.path.join(directory, f'SYTs_{shape_str}.txt')
-    
-    # Save SYTs to file
-    with open(filename, 'w') as file:
-        for syt in syt_list:
-            file.write(f'{syt}\n')
+  Parameters:
+  - shape (Tuple[int]): The shape of the SYTs.
+  - directory (str): The directory to save the files in.
+  """
+  # Ensure the directory exists
+  os.makedirs(directory, exist_ok=True)
+  
+  # Generate SYTs for the given shape
+  syt_list = SYTs(shape)
+  
+  # Convert shape to string format for filename
+  shape_str = '_'.join(map(str, shape))
+  
+  # Define the filename
+  filename = os.path.join(directory, f'SYTs_{shape_str}.txt')
+  
+  # Save SYTs to file
+  with open(filename, 'w') as file:
+      for syt in syt_list:
+          file.write(f'{syt}\n')
