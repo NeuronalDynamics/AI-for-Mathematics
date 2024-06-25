@@ -19,8 +19,18 @@ def parenthesization_to_tensor(parenthesization):
         Each element in the tensor is either 0 or 1, representing whether the corresponding
         parenthesization character is "(" or ")".
     """
-    # TODO
-    pass
+    # Create a list to hold the binary representation
+    binary_representation = []
+    for char in parenthesization:
+        if char == "(":
+            binary_representation.extend([1, 0])
+        elif char == ")":
+            binary_representation.extend([0, 1])
+        else:
+            raise ValueError("Invalid character in parenthesization string")
+    
+    tensor_representation = torch.tensor(binary_representation, dtype=torch.float32)
+    return tensor_representation
 
 class ParenthesizationDataset(Dataset):
     def __init__(self, n):
