@@ -5,23 +5,12 @@
 
 **Description of model weights:**
 
-Model Architecture:
-
-The model consists of an input layer with n^2 nodes (one-hot encoded permutations of length n).
-There is one hidden layer with a specified number of nodes (in this case, 2 nodes).
-The output layer produces a binary output, indicating the value of stat1.
-
-Heatmap Visualization:
-
 The heatmap of the first hidden layer's weights shows that the last digit in the permutation plays a crucial role in determining stat1.
+
 Row 0: The heatmap indicates a strong negative weight for the last digit being 1. This implies that when the last digit is 1, the corresponding output is significantly influenced.
+
 Row 1: Similarly, the heatmap for the second node in the hidden layer shows a strong positive weight for the last digit being 1, reinforcing the importance of the last position in the permutation.
 
-Model Feature Connections:
-
-The connection plot visualizes the weights between the input layer and the hidden layer.
-The lines' thickness and color (red for positive weights, blue for negative weights) illustrate the influence of each input feature (each position in the permutation) on the hidden nodes.
-The plot shows that the connections from the last position in the permutation to the hidden nodes are the most significant, further supporting the observation that the last digit is critical in determining stat1.
 
 **How to compute statistic:**
 
@@ -35,23 +24,14 @@ Tested the accuracy of the rule is:  1.0, please see last section of stat1.ipynb
 
 **Description of model weights:**
 
-Model Architecture:
-
-The model consists of an input layer with n^2 nodes (one-hot encoded permutations of length n).
-There is one hidden layer with a specified number of nodes (in this case, 2 nodes).
-The output layer produces a binary output, indicating the value of stat2.
-
 Heatmap Visualization:
 
 The heatmap of the first hidden layer's weights shows the significance of the last two digits in the permutation.
+
 Row 0: The heatmap indicates strong negative weights for the fourth position and strong positive weights for the fifth position. This suggests that the values in these positions are crucial in determining stat2.
+
 Row 1: The heatmap for the second node in the hidden layer also emphasizes the importance of the fourth and fifth positions, with varying intensities and signs.
 
-Model Feature Connections:
-
-The connection plot visualizes the weights between the input layer and the hidden layer.
-The lines' thickness and color (red for positive weights, blue for negative weights) illustrate the influence of each input feature (each position in the permutation) on the hidden nodes.
-The plot shows that the connections from the last two positions in the permutation to the hidden nodes are the most significant, supporting the observation that these positions are critical in determining stat2.
 
 **How to compute statistic:**
 
@@ -65,24 +45,16 @@ Tested the accuracy of the rule is:  1.0, please see last section of stat2.ipynb
 
 **Description of model weights:**
 
-Model Architecture:
-
-The model consists of an input layer with n^2 nodes (one-hot encoded permutations of length n).
-There are multiple hidden layers with specified nodes.
-The output layer produces a binary output, indicating the value of stat3.
-
 Heatmap Visualization:
 
-The heatmap of the hidden layers' weights shows significant connections between certain positions in the permutation and the hidden nodes.**
+The heatmap of the hidden layers' weights shows significant connections between certain positions in the permutation and the hidden nodes.
+
 Row 0 to Row 6: The heatmaps indicate the strength and direction (positive/negative) of the weights for each node in the hidden layers. Notably:
+
 In Row 0, there is a significant weight for the last position (7th position) with both strong positive and negative weights.
+
 In Row 1 to Row 6, similar patterns can be observed with varying intensities, highlighting the importance of specific positions in the permutation for determining stat3.
 
-Model Feature Connections:
-
-The connection plot visualizes the weights between the input layer and the hidden layers.
-The lines' thickness and color (red for positive weights, blue for negative weights) illustrate the influence of each input feature (each position in the permutation) on the hidden nodes.
-The plot shows complex connections from multiple positions in the permutation to the hidden nodes, supporting the observation that multiple positions are critical in determining stat3.
 
 **How to compute statistic:**
 
@@ -96,37 +68,32 @@ Tested the accuracy of the rule is:  95.53571428571429%, close but not right, I 
 
 **Description of model weights:**
 
-The heatmap visualizations indicate significant weights on the 1st and 5th positions of the permutations, suggesting that these positions are highly influential in determining stat4.
-
-Model Architecture and Heatmaps:
-
-The model consists of an input layer with n^2 nodes (one-hot encoded permutations of length n).
-The heatmaps for various rows indicate that the 1st and 5th positions show strong positive and negative weights, highlighting their importance.
-Connections from these positions to the hidden nodes are significant, suggesting complex interactions.
-
 Heatmap Analysis:
 
 Row 0:
 
 Position 1: Shows a strong positive weight (red).
+
 Position 2: Shows a mixed weight with a slight positive tendency.
+
 Position 3: Shows a mixed weight with slight positive and negative tendencies.
+
 Position 4: Shows a strong positive weight (red).
+
 Position 5: Shows a mixed weight with a slight positive tendency.
 
 Row 1:
 
 Position 1: Shows a strong negative weight (blue).
+
 Position 2: Shows a mixed weight with strong negative and slight positive tendencies.
+
 Position 3: Shows a strong negative weight (blue).
+
 Position 4: Shows a mixed weight with slight positive and negative tendencies.
+
 Position 5: Shows a strong negative weight (blue).
 
-Model Feature Connections:
-
-The connection plot visualizes the weights between the input layer and the hidden layers.
-The lines' thickness and color (red for positive weights, blue for negative weights) illustrate the influence of each input feature (each position in the permutation) on the hidden nodes.
-The plot shows complex connections from multiple positions in the permutation to the hidden nodes, supporting the observation that multiple positions are critical in determining stat4.
 
 **How to compute statistic:**
 
@@ -170,18 +137,40 @@ Tested the accuracy of the rule is:  90.83333333333333%, close but not right, se
 
 
 ## Statistic 5
-**Accuracy achieved:**
+**Accuracy achieved: 40.625%**
 
 **Description of model weights:**
 
+Heatmap Analysis:
+
+Row 0 to Row 10:
+
+This distribution suggests that the model captures the interactions between different positions to determine the number of inversions.
+
 **How to compute statistic:**
+
+Rule #5: number of inversions in the permutation
+
+Tested the accuracy of the rule is:  1.0, please see last section of stat5.ipynb
+
 
 ## Statistic 6
-**Accuracy achieved:**
+**Accuracy achieved: 78.125%**
 
 **Description of model weights:**
 
+Heatmap Analysis:
+
+Row 1 to Row 2:
+
+This distribution suggests that the model captures the interactions between different positions to determine the parity of the number of inversions.
+
 **How to compute statistic:**
+
+Rule #6: 1 if the number of inversions in the permutation is odd, and 0 if the number of inversions is even.
+
+Tested the accuracy of the rule is:  1.0, please see last section of stat6.ipynb
+
 
 ## Statistic 7
 **Accuracy achieved:**
