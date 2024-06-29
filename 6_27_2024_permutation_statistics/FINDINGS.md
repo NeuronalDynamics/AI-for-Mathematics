@@ -24,8 +24,6 @@ Tested the accuracy of the rule is:  1.0, please see last section of stat1.ipynb
 
 **Description of model weights:**
 
-Heatmap Visualization:
-
 The heatmap of the first hidden layer's weights shows the significance of the last two digits in the permutation.
 
 Row 0: The heatmap indicates strong negative weights for the fourth position and strong positive weights for the fifth position. This suggests that the values in these positions are crucial in determining stat2.
@@ -44,8 +42,6 @@ Tested the accuracy of the rule is:  1.0, please see last section of stat2.ipynb
 **Accuracy achieved: 100%**
 
 **Description of model weights:**
-
-Heatmap Visualization:
 
 The heatmap of the hidden layers' weights shows significant connections between certain positions in the permutation and the hidden nodes.
 
@@ -67,8 +63,6 @@ Tested the accuracy of the rule is:  95.53571428571429%, close but not right, I 
 **Accuracy achieved: 100%**
 
 **Description of model weights:**
-
-Heatmap Analysis:
 
 Row 0:
 
@@ -141,8 +135,6 @@ Tested the accuracy of the rule is:  90.83333333333333%, close but not right, se
 
 **Description of model weights:**
 
-Heatmap Analysis:
-
 Row 0 to Row 10:
 
 This distribution suggests that the model captures the interactions between different positions to determine the number of inversions.
@@ -158,8 +150,6 @@ Tested the accuracy of the rule is:  1.0, please see last section of stat5.ipynb
 **Accuracy achieved: 78.125%**
 
 **Description of model weights:**
-
-Heatmap Analysis:
 
 Row 1 to Row 2:
 
