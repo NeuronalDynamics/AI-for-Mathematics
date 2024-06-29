@@ -4,7 +4,9 @@
 **Accuracy achieved: 100%**
 
 **Description of model weights:**
+
 Model Architecture:
+
 The model consists of an input layer with n^2 nodes (one-hot encoded permutations of length n).
 There is one hidden layer with a specified number of nodes (in this case, 2 nodes).
 The output layer produces a binary output, indicating the value of stat1.
@@ -32,6 +34,7 @@ Tested the accuracy of the rule is:  1.0, please see last section of stat1.ipynb
 **Accuracy achieved: 100%**
 
 **Description of model weights:**
+
 Model Architecture:
 
 The model consists of an input layer with n^2 nodes (one-hot encoded permutations of length n).
@@ -61,6 +64,7 @@ Tested the accuracy of the rule is:  1.0, please see last section of stat2.ipynb
 **Accuracy achieved: 100%**
 
 **Description of model weights:**
+
 Model Architecture:
 
 The model consists of an input layer with n^2 nodes (one-hot encoded permutations of length n).
