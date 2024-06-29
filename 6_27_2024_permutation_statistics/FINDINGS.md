@@ -163,22 +163,49 @@ Tested the accuracy of the rule is:  1.0, please see last section of stat6.ipynb
 
 
 ## Statistic 7
-**Accuracy achieved:**
+**Accuracy achieved: 62.5%**
 
 **Description of model weights:**
 
+Row 0 (Position 1): There is a strong positive weight connection to the first position and a strong negative weight to the second position, indicating the model is focusing on identifying descending pairs involving the first element.
+
+Row 1 (Position 2): Similar to Row 0, strong connections indicate the importance of checking the first two positions for descending pairs.
+
+Row 2 (Position 3): The model appears to focus on the relationship between the second and third positions.
+
+Row 3 (Position 4): This row's weights indicate the model checks the third and fourth positions for descending pairs.
+
+Row 4 (Position 5): The strong weights in this row show the model focuses on the fourth and fifth positions.
+
 **How to compute statistic:**
+
+Rule #7: stat7 is equal to the number of descending pairs
+
+Tested the accuracy of the rule is:  1.0, please see last section of stat7.ipynb
 
 ## Statistic 8
-**Accuracy achieved:**
+**Accuracy achieved: 92.81684027777777%**
 
 **Description of model weights:**
 
+This distribution suggests that the model captures the interactions between different positions to determine the longest run length.
+
 **How to compute statistic:**
+
+Rule #8: For dataset permutations_8.csv, stat8 is 1 if the longest run length in the permutation exceeds 5; otherwise, it is 0.
+
+Tested the accuracy of the rule is:  0.9940476190476191, very close but not right, maybe give a half extra point please, please see last section of stat8.ipynb
+
 
 ## Statistic 9
-**Accuracy achieved:**
+**Accuracy achieved: 85.69878472222223%**
 
 **Description of model weights:**
 
+This distribution suggests that the model effectively captures the interactions between different positions to determine the number of inversions.
+
 **How to compute statistic:**
+
+Rule #9: For dataset permutations_8 if the number of inversions is less than 4, stat9 is 1. If the number of inversions is 4 or more, stat9 is 0.
+
+Tested the accuracy of the rule is:  0.9652529761904762, close but not right, maybe give a half extra point please, please see last section of stat9.ipynb
