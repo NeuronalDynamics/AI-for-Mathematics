@@ -135,20 +135,35 @@ Based on the decision tree analysis, stat4 can be computed using the following r
 Decision Tree Rules:
 
 Rule 1: If the 1st digit is less than or equal to 1, stat4 equals 0.
+
 Rule 2: If the 1st digit is greater than 1:
+
 If the 5th digit is less than or equal to 4.5:
+
 If the 2nd digit is less than or equal to 2.5:
+
 If the 2nd digit is less than or equal to 1.5:
+
 If the 4th digit is less than or equal to 3.5, stat4 equals 1.
+
 Otherwise, stat4 equals 0.
+
 Otherwise, stat4 equals 0.
+
 Otherwise:
+
 If the 4th digit is less than or equal to 3.5:
+
 If the 3rd digit is less than or equal to 2.5, stat4 equals 1.
+
 Otherwise, stat4 equals 1.
+
 Otherwise:
+
 If the 4th digit is less than or equal to 4.5, stat4 equals 0.
+
 Otherwise, stat4 equals 1.
+
 If the 5th digit is greater than 4.5, stat4 equals 0.
 
 Tested the accuracy of the rule is:  90.83333333333333%, close but not right, see last section of stat4.ipynb
