@@ -71,7 +71,7 @@ The model consists of an input layer with n^2 nodes (one-hot encoded permutation
 There are multiple hidden layers with specified nodes.
 The output layer produces a binary output, indicating the value of stat3.
 
-Heatmap Visualization:**
+Heatmap Visualization:
 
 The heatmap of the hidden layers' weights shows significant connections between certain positions in the permutation and the hidden nodes.**
 Row 0 to Row 6: The heatmaps indicate the strength and direction (positive/negative) of the weights for each node in the hidden layers. Notably:
@@ -92,11 +92,67 @@ Tested the accuracy of the rule is:  95.53571428571429%, close but not right, I 
 
 
 ## Statistic 4
-**Accuracy achieved:**
+**Accuracy achieved: 100%**
 
 **Description of model weights:**
 
+The heatmap visualizations indicate significant weights on the 1st and 5th positions of the permutations, suggesting that these positions are highly influential in determining stat4.
+
+Model Architecture and Heatmaps:
+
+The model consists of an input layer with n^2 nodes (one-hot encoded permutations of length n).
+The heatmaps for various rows indicate that the 1st and 5th positions show strong positive and negative weights, highlighting their importance.
+Connections from these positions to the hidden nodes are significant, suggesting complex interactions.
+
+Heatmap Analysis:
+
+Row 0:
+
+Position 1: Shows a strong positive weight (red).
+Position 2: Shows a mixed weight with a slight positive tendency.
+Position 3: Shows a mixed weight with slight positive and negative tendencies.
+Position 4: Shows a strong positive weight (red).
+Position 5: Shows a mixed weight with a slight positive tendency.
+
+Row 1:
+
+Position 1: Shows a strong negative weight (blue).
+Position 2: Shows a mixed weight with strong negative and slight positive tendencies.
+Position 3: Shows a strong negative weight (blue).
+Position 4: Shows a mixed weight with slight positive and negative tendencies.
+Position 5: Shows a strong negative weight (blue).
+
+Model Feature Connections:
+
+The connection plot visualizes the weights between the input layer and the hidden layers.
+The lines' thickness and color (red for positive weights, blue for negative weights) illustrate the influence of each input feature (each position in the permutation) on the hidden nodes.
+The plot shows complex connections from multiple positions in the permutation to the hidden nodes, supporting the observation that multiple positions are critical in determining stat4.
+
 **How to compute statistic:**
+
+Based on the decision tree analysis, stat4 can be computed using the following refined rules:
+
+Decision Tree Rules:
+
+Rule 1: If the 1st digit is less than or equal to 1, stat4 equals 0.
+Rule 2: If the 1st digit is greater than 1:
+If the 5th digit is less than or equal to 4.5:
+If the 2nd digit is less than or equal to 2.5:
+If the 2nd digit is less than or equal to 1.5:
+If the 4th digit is less than or equal to 3.5, stat4 equals 1.
+Otherwise, stat4 equals 0.
+Otherwise, stat4 equals 0.
+Otherwise:
+If the 4th digit is less than or equal to 3.5:
+If the 3rd digit is less than or equal to 2.5, stat4 equals 1.
+Otherwise, stat4 equals 1.
+Otherwise:
+If the 4th digit is less than or equal to 4.5, stat4 equals 0.
+Otherwise, stat4 equals 1.
+If the 5th digit is greater than 4.5, stat4 equals 0.
+
+Tested the accuracy of the rule is:  90.83333333333333%, close but not right, see last section of stat4.ipynb
+
 
 ## Statistic 5
 **Accuracy achieved:**
