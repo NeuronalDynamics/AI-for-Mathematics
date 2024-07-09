@@ -30,7 +30,8 @@ Tactics cheatsheet:
   - `lt`, `le`, `gt`, `ge`, `eq`, `ne` for <, ≤, >, ≥, =, ≠
   - `assoc` and `comm` for associativity and commutativity
 -/
-/--/
+
+/-
 theorem linear_formula (a : ℝ) (b: ℝ) (x: ℝ) (ha_ne_zero : a ≠ 0) : a*x+b = 0 ↔ x = -b/a := by
   apply Iff.intro
   case mp =>
